@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.ArticleCommtDao">
+    <resultMap id="List1" type="ArticleCommt">
+        <id property="atccid" column="ATCCID"/>
+        <result property="commt" column="COMMT"/>
+
+        <association property="Carticle" javaType="Article">
+        <id property="atcid" column="ATCID"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        </association>
+
+        <association property="Cauthor" javaType="Author">
+        <id property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        </association>
+    </resultMap>
+
+
+    <resultMap id="articleCommtList2" type="ArticleCommt">
+        <id property="atccid" column="ATCCID"/>
+        <result property="commt" column="COMMT"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="List1">
+        SELECT name,commt,title,content FROM homework.article_commt ac LEFT JOIN homework.article atc
+        on ac.ar_id=atc.id LEFT JOIN homework.author ath on ac.au_id=ath.id
+    </select>
+</mapper>

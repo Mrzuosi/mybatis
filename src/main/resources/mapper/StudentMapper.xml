@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+<mapper namespace="com.dao.StudentDao">
+    <resultMap id="stuList1" type="Student">
+        <id property="stuId" column="STUID"/>
+        <result property="stuName" column="STUNAME"/>
+        <result property="stuSex" column="STUSEX"/>
+        <result property="stuJoinTime" column="STUJOINTIME"/>
+        <association property="stuClass" javaType="ClassInfo" resultMap="com.dao.ClassInfoDao.classList1"/>
+
+        <association property="stuClass" javaType="ClassInfo">
+            <id property="classId" column="CLASSID"/>
+            <result property="className" column="CLASSNAME"/>
+            <result property="classGrade" column="CLASSGRADE"/>
+        </association>
+
+    </resultMap>
+
+    <select id="findAll" resultMap="stuList1">
+        SELECT stuid,stuname,stusex,stujointime,classid,classname,classgrade FROM stuinfo s LEFT JOIN classinfo c
+         on s.sclassid=c.classid
+    </select>
+    -->
+<mapper namespace="com.dao.StudentDao">
+
+    <update id="updateStudent" parameterType="Student">
+        UPDATE stuinfo
+        <set>
+            <if test="stuName!=null and stuName!='' ">
+                stuname=#{stuName},
+            </if>
+            <if test="stuSex!=null and stuSex!='' ">
+                stusex=#{stuSex}
+            </if>
+            <if test="stuClass!=null and stuClass.classId!=null">
+                sclassid=#{stuClass.classId}
+            </if>
+        </set>
+        WHERE stuid=#{stuId}
+    </update>
+
+
+
+</mapper>

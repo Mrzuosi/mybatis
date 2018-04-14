@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.AuthorDao">
+    <resultMap id="authorList1" type="Author">
+        <id property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <collection property="articles" ofType="Article" resultMap="com.dao.ArticleDao.articleList1"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="authorList1">
+        SELECT a.id,name,atc.id,title,content,ac.id,commt FROM homework.author a LEFT JOIN homework.article atc on a.id=atc.au_id LEFT JOIN homework.article_commt ac
+         on atc.id=ac.ar_id
+    </select>
+</mapper>

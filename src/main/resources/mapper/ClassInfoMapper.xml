@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--CarDao的映射文件，StudentDao的实现-->
+<mapper namespace="com.dao.ClassInfoDao">
+    <!--嵌套结果集的方式-->
+    <resultMap id="classList1" type="ClassInfo">
+        <id property="classId" column="CLASSID"/>
+        <result property="className" column="CLASSNAME"/>
+        <result property="classGrade" column="CLASSGRADE"/>
+        <collection property="students" ofType="Student">
+            <id property="stuId" column="STUID"/>
+            <result property="stuName" column="STUNAME"/>
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="classList1">
+        SELECT classid,classname,classgrade,stuid,stuname FROM classinfo c LEFT JOIN stuinfo s on c.classid=s.sclassid
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CourseDao">
+    <resultMap id="courseList1" type="Course">
+        <id property="courseId" column="COURSEID"/>
+        <result property="courseName" column="COURSENAME"/>
+        <collection property="students" ofType="Student">
+            <id property="stuId" column="STUID"/>
+            <result property="stuName" column="STUNAME"/>
+            <association property="stuClass" javaType="ClassInfo">
+                <id property="classId" column="CLASSID"/>
+                <result property="className" column="CLASSNAME"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="courseList1">
+        SELECT courseid,coursename,stuid,stuname,classid,classname FROM course c1 LEFT JOIN sc on c1.courseId=sc.cid
+         LEFT JOIN stuinfo s ON s.stuid=sc.sid LEFT JOIN classinfo c ON s.sclassid=c.classid
+    </select>
+</mapper>

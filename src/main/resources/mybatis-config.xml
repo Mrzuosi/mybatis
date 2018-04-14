@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.pojo.Author" alias="Author"></typeAlias>
+        <typeAlias type="com.pojo.Article" alias="Article"></typeAlias>
+        <typeAlias type="com.pojo.ArticleCommt" alias="ArticleCommt"></typeAlias>
+        <typeAlias type="com.pojo.Student" alias="Student"></typeAlias>
+        <typeAlias type="com.pojo.ClassInfo" alias="ClassInfo"></typeAlias>
+        <typeAlias type="com.pojo.Course" alias="Course"></typeAlias>
+    </typeAliases>
+    <environments default="env1">
+        <environment id="env1">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/employee?serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--指定映射文件-->
+    <mappers>
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/ArticleCommtMapper.xml"/>
+        <mapper resource="mapper/ClassInfoMapper.xml"/>
+        <mapper resource="mapper/CourseMapper.xml"/>
+        <mapper resource="mapper/AuthorMapper.xml"/>
+        <mapper resource="mapper/ArticleMapper.xml"/>
+    </mappers>
+
+</configuration>
